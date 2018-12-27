@@ -124,25 +124,25 @@ public class PaymentProject {
 		System.out.println(cardnum);
 		StringTokenizer st=new StringTokenizer(cardnum,"Card Number:-  ");
 		Long cardno = Long.parseLong(st.nextToken());
-		String cardn = String.valueOf(cardno);
+		cardn = String.valueOf(cardno);
 		System.out.println(cardno);
 		String cvv = driver.findElement(By.xpath("//section[@id='three']//h4[2]")).getText();
 		System.out.println(cvv);
 		StringTokenizer st1=new StringTokenizer(cvv,"CVV:-  ");
 		long cvvnum = Long.parseLong(st1.nextToken());
-		String cvvno = String.valueOf(cvvnum);
+		cvvno = String.valueOf(cvvnum);
 		System.out.println(cvvno);
 		String exp = driver.findElement(By.xpath("//section[@id='three']//h4[3]")).getText();
 		System.out.println(exp);
-		String date = exp.substring(6, 8);
+		date = exp.substring(6, 8);
 		System.out.println(date);
-		String year = exp.substring(9, 13);
+		year = exp.substring(9, 13);
 		System.out.println(year);
 		String climit = driver.findElement(By.xpath("//section[@id='three']//h4//span")).getText();
 		System.out.println(climit);
 		StringTokenizer stk=new StringTokenizer(climit,"$");
 		double limit = Double.parseDouble(stk.nextToken());
-		String lmt = String.valueOf(limit);
+		lmt = String.valueOf(limit);
 		System.out.println(lmt);
 	}
 	@Then("passing the details to cart")
@@ -156,5 +156,6 @@ public class PaymentProject {
 		driver.findElement(By.xpath("//select[@id='month']")).sendKeys(date);
 		driver.findElement(By.xpath("//select[@id='year']")).sendKeys(year);
 		driver.findElement(By.xpath("//input[@id='cvv_code']")).sendKeys(cvvno);
+		driver.findElement(By.xpath("//input[@type='submit']")).click();
 	}	}
 	

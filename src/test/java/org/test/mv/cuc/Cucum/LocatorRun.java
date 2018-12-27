@@ -6,8 +6,8 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features= {"src/test/java/feature/PaymentGateWay.feature"},glue= {"org\\test\\mv\\cuc\\Cucum"}, tags= {"@card"},
+@CucumberOptions(features= {"D:\\selenium\\Cucum\\feature\\Lifetime.feature"},glue= {"org\\test\\mv\\cuc\\Cucum"}, tags= {"@tag"},
 	dryRun=false,monochrome=true)
-public class PayTestRunner {
-	
+public class LocatorRun {
+
 }
