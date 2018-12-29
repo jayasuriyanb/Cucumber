@@ -14,7 +14,7 @@ public class Flipkart_ArgumentPassing {
 	static WebDriver driver;
 	@Given("user is in flipkart home page")
 	public void user_is_in_flipkart_home_page() {
-		System.setProperty("webdriver.chrome.driver", "D:\\selenium\\Cucum\\driver\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\selenium\\Cucu\\Cucumber\\driver\\chromedriver.exe");
 		driver=new ChromeDriver();
 		driver.get("https://www.flipkart.com/");
 		driver.manage().window().maximize();
@@ -57,4 +57,36 @@ public class Flipkart_ArgumentPassing {
 		 Assert.assertEquals("mobile",driver.getCurrentUrl().contains("mobile"));
 
 	}
+	
+	//filter
+	
+	@When("user enter the product {string}")
+	public void user_enter_the_product(String mobile) throws InterruptedException {
+		driver.findElement(By.xpath("//input[@name='q']")).sendKeys(mobile);
+		driver.findElement(By.xpath("//button[@class='vh79eN']")).click();
+		Thread.sleep(3000);
+	}
+	@When("using filters user selecting product {string},{string},{string}")
+	public void using_filters_user_selecting_product(String RAM, String RATING, String SIM) throws InterruptedException {
+		String locator="//div[contains(text(),'$')]";
+		locator=locator.replace("$", RAM);
+		driver.findElement(By.xpath(locator)).click();
+		String rating="//div[contains(text(),'@★')]";
+		rating=rating.replace("@", RATING);
+		driver.findElement(By.xpath(rating)).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("(//div[@class='_3xglSm _1iMC4O'])[9]")).click();
+		String sim="//div[text()='$ Sim']";
+		sim=sim.replace("$", SIM);
+		driver.findElement(By.xpath(sim)).click();
+
+	}
+
+	@Then("verify weather the user get the product")
+	public void verify_weather_the_user_get_the_product() {
+		Assert.assertEquals("Dual Sim", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[1]")).getText());
+		Assert.assertEquals("4★ & above", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[2]")).getText());
+		Assert.assertEquals("Less than 512 MB", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[3]")).getText());
+	}
+
 }

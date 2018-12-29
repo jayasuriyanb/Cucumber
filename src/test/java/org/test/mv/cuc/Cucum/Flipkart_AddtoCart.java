@@ -1,3 +1,4 @@
+
 package org.test.mv.cuc.Cucum;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Flipkart_AddtoCart {
 	static WebDriver driver;
 	@Given("the user is in flipkart home page")
 	public void the_user_is_in_flipkart_home_page() {
-		System.setProperty("webdriver.chrome.driver", "D:\\selenium\\Cucum\\driver\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\selenium\\Cucu\\Cucumber\\driver\\chromedriver.exe");
 		driver=new ChromeDriver();
 		driver.get("https://www.flipkart.com/");
 		driver.manage().window().maximize();
@@ -60,7 +61,7 @@ public class Flipkart_AddtoCart {
 		WebElement head = driver.findElement(By.xpath("(//div[@class='_1HmYoV _35HD7C'])[2]"));
 		List<WebElement> product = head.findElements(By.xpath("//div[@class='_3O0U0u']"));
 		Random r =new Random();
-		int a=r.nextInt(10)+1;
+		int a=r.nextInt(20)+1;
 		System.out.println(a);
 		product.get(a).click();
 		Thread.sleep(2000);
