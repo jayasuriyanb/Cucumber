@@ -18,9 +18,9 @@ Feature: menu navigation using arguments
   Scenario Outline: Flipkart using filters
     Given user is in flipkart home page
     When user enter the product "<product>"
-    And using filters user selecting product "<RAM>","<CUSTOMER RATING>","<SIM>"
+    And using filters user selecting product "<RAM>","<CUSTOMER RATING>","<SIM>","<MINIMUM>","<MAXIMUM>"
     Then verify weather the user get the product
 
     Examples: 
-      | product  | RAM | CUSTOMER RATING | SIM  |
-      | iphone 7 | 512 |               4 | Dual |
+      | product  | RAM | CUSTOMER RATING | SIM  | MINIMUM | MAXIMUM |
+      | iphone 7 | 512 |               4 | Dual | ₹16000  | ₹50000+ |

@@ -1,10 +1,13 @@
 package org.test.mv.cuc.Cucum;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -64,29 +67,40 @@ public class Flipkart_ArgumentPassing {
 	public void user_enter_the_product(String mobile) throws InterruptedException {
 		driver.findElement(By.xpath("//input[@name='q']")).sendKeys(mobile);
 		driver.findElement(By.xpath("//button[@class='vh79eN']")).click();
-		Thread.sleep(3000);
 	}
-	@When("using filters user selecting product {string},{string},{string}")
-	public void using_filters_user_selecting_product(String RAM, String RATING, String SIM) throws InterruptedException {
+	@When("using filters user selecting product {string},{string},{string},{string},{string}")
+	public void using_filters_user_selecting_product(String RAM, String RATING, String SIM, String min, String max) {
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("//option[text()='Min']")).click();
+		WebElement minimum = driver.findElement(By.xpath("(//select[@class='fPjUPw'])[1]"));
+		Select select=new Select(minimum);
+		select.selectByVisibleText(min);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("//option[text()='₹50000+']")).click();
+		WebElement maximum = driver.findElement(By.xpath("(//select[@class='fPjUPw'])[2]"));
+		Select select_max=new Select(maximum);
+		select_max.selectByVisibleText(max);
 		String locator="//div[contains(text(),'$')]";
 		locator=locator.replace("$", RAM);
 		driver.findElement(By.xpath(locator)).click();
 		String rating="//div[contains(text(),'@★')]";
 		rating=rating.replace("@", RATING);
 		driver.findElement(By.xpath(rating)).click();
-		Thread.sleep(1000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("(//div[@class='_3xglSm _1iMC4O'])[9]")).click();
 		String sim="//div[text()='$ Sim']";
 		sim=sim.replace("$", SIM);
 		driver.findElement(By.xpath(sim)).click();
-
+		
 	}
+	
 
 	@Then("verify weather the user get the product")
 	public void verify_weather_the_user_get_the_product() {
-		Assert.assertEquals("Dual Sim", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[1]")).getText());
+		Assert.assertEquals("CLEAR ALL", driver.findElement(By.xpath("(//span[text()='Clear all'])[1]")).getText());
+	/*	Assert.assertEquals("Dual Sim", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[1]")).getText());
 		Assert.assertEquals("4★ & above", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[2]")).getText());
-		Assert.assertEquals("Less than 512 MB", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[3]")).getText());
+		Assert.assertEquals("Less than 512 MB", driver.findElement(By.xpath("(//div[@class='_3UZZGt'])[3]")).getText()); */
 	}
 
 }
